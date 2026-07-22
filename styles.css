@@ -1,0 +1,56 @@
+/* Custom Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes glowPulse {
+    0% {
+        box-shadow: 0 0 10px rgba(212, 162, 78, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(212, 162, 78, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(212, 162, 78, 0.4);
+    }
+}
+
+/* Animation Classes */
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0; /* Starting state before animation */
+}
+
+.animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.glow-pulse {
+    animation: glowPulse 3s infinite;
+}
+
+/* Animation Delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* Custom Form Display States for smooth transitions */
+.form-visible {
+    display: flex !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
