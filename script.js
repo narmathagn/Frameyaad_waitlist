@@ -12,6 +12,90 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorMsg = document.getElementById('error-msg');
     const watcherCountEl = document.getElementById('watcher-count');
 
+    // Secret Unmute Logic
+    const bgVideo = document.getElementById('bg-video');
+    if (bgVideo) {
+        const unlockAudio = () => {
+            if (bgVideo.muted) {
+                bgVideo.muted = false;
+                // Ensure video is playing after unmuting
+                bgVideo.play().catch(e => console.log("Audio unlock failed:", e));
+            }
+            // Remove listeners after first interaction
+            document.removeEventListener('click', unlockAudio);
+            document.removeEventListener('keydown', unlockAudio);
+            document.removeEventListener('touchstart', unlockAudio);
+        };
+
+        // Attach to natural interactions
+        document.addEventListener('click', unlockAudio);
+        document.addEventListener('keydown', unlockAudio);
+        document.addEventListener('touchstart', unlockAudio);
+    }
+
+    // Floating Dust Particles Logic
+    const canvas = document.getElementById('particle-canvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let width, height;
+
+        const resize = () => {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            initParticles();
+        };
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2 + 0.5; // Small golden dust
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * -1 - 0.2; // Float slowly upwards
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Wrap around
+                if (this.y < -10) this.y = height + 10;
+                if (this.x < -10) this.x = width + 10;
+                if (this.x > width + 10) this.x = -10;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(212, 162, 78, ${this.opacity})`; // brand-gold
+                ctx.fill();
+            }
+        }
+
+        const initParticles = () => {
+            particles = [];
+            const numParticles = Math.floor((width * height) / 8000); // Responsive particle count
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+        };
+
+        const animate = () => {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        };
+
+        window.addEventListener('resize', resize);
+        resize();
+        animate();
+    }
+
     // UI Logic: Reveal Form
     ctaBtn.addEventListener('click', () => {
         ctaBtn.classList.add('hidden');

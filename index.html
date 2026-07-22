@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frameyard - The Future of Custom Wall Art</title>
+    <title>Frameyaad - The Future of Custom Wall Art</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="images/Frameyaad_Logo.jpeg">
     <meta name="description"
         content="We help you turn memories into beautifully framed art. Join the Frameyard waitlist.">
     <!-- Tailwind CSS -->
@@ -39,20 +41,23 @@
 
     <!-- Background Video -->
     <div class="absolute inset-0 w-full h-full z-0 bg-brand-dark">
-        <video class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline
+        <video id="bg-video" class="absolute inset-0 w-full h-full object-cover" autoplay loop muted playsinline
             poster="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=2070&auto=format&fit=crop"
             aria-label="Background video of beautiful framed art">
-            <source src="Woman_decorating_empty_wall_202607201700.mp4" type="video/mp4">
+            <source src="images/Woman_decorating_empty_wall_202607201700.mp4" type="video/mp4">
             <!-- Fallback text if video fails -->
         </video>
         <!-- Overlay -->
         <div class="absolute inset-0 bg-black/55"></div>
+        <!-- Particle Canvas -->
+        <canvas id="particle-canvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-60"></canvas>
     </div>
 
     <!-- Content -->
     <main class="relative z-10 w-full h-full flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
         <!-- Logo -->
-        <div class="absolute top-6 left-6 md:top-8 md:left-8">
+        <div class="absolute top-6 left-6 md:top-8 md:left-8 flex items-center gap-3">
+            <img src="images/Frameyaad_Logo.jpeg" alt="Frameyaad Logo" class="h-8 md:h-10 w-auto object-contain animate-fade-in">
             <h1 class="text-xl md:text-2xl font-semibold tracking-widest uppercase text-white/90 animate-fade-in">
                 Frameyaad
             </h1>
@@ -62,28 +67,26 @@
         <div class="max-w-3xl text-center flex flex-col items-center mt-8">
             <h2
                 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-serif mb-4 sm:mb-6 leading-tight animate-fade-in-up delay-100">
-                The Future of <span class="text-brand-gold">Custom Wall Art</span>
+                Turn Your Memories Into <span class="text-brand-gold">Timeless Wall Art</span>
             </h2>
 
             <p
                 class="text-base sm:text-lg md:text-xl md:text-2xl text-gray-200 mb-3 sm:mb-4 animate-fade-in-up delay-200 font-light">
-                We help you turn memories into beautifully framed art.
+                Upload your photo, preview it instantly, and order a handcrafted frame you'll love.
             </p>
 
             <p
                 class="text-sm sm:text-base md:text-lg text-gray-300 italic tracking-wide mb-6 sm:mb-10 animate-fade-in-up delay-300">
-                See it. Feel it. Live it.
+                Preview it. Frame it. Love it.
             </p>
 
             <!-- CTA Section -->
             <div class="flex flex-col items-center animate-fade-in-up delay-400 w-full max-w-md">
-                <p class="text-sm text-gray-400 mb-3 uppercase tracking-wider">Before you order.</p>
-
                 <!-- Initial CTA Button -->
                 <button id="cta-btn"
                     class="group relative px-8 py-4 bg-brand-gold text-brand-dark font-semibold rounded-full text-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(212,162,78,0.5)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-gold focus:ring-offset-brand-dark min-h-[44px] flex items-center justify-center glow-pulse"
                     aria-label="Join Waitlist">
-                    <span>Join Waitlist</span>
+                    <span>Join the Waitlist</span>
                 </button>
 
                 <!-- Email Form (Hidden initially) -->
@@ -130,7 +133,7 @@
                     class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 backdrop-blur-md text-sm text-gray-300">
                     <span class="text-lg">👀</span>
                     <span id="watcher-count" class="font-semibold text-brand-gold transition-all duration-300">0</span>
-                    <span>people watching</span>
+                    <span>plus people are exploring today</span>
                 </div>
             </div>
         </div>
